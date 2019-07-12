@@ -1,0 +1,22 @@
+---
+- block:
+    - name: Make docker.service drop-in dir
+      file:
+        path: "{{ dropin_dir }}"
+        state: directory
+    - name: Deploy proxy settings
+      template:
+        src: docker-proxy.conf.j2
+        dest: "{{ dropin_dir }}/proxy.conf"
+  vars:
+    dropin_dir: /etc/systemd/system/docker.service.d
+    http_proxy: "{{ ansible_env.HTTP_PROXY }}"
+  become: yes
+  when: ansible_env['HTTP_PROXY'] is defined
+
+- name: Add docker member
+  user:
+    name: "{{ ansible_ssh_user }}"
+    groups:
+      - docker
+  become: yes

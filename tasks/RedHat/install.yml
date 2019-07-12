@@ -1,0 +1,9 @@
+---
+- name: enable docker-ce repo
+  shell: "yum-config-manager --add-repo {{ docker_ce_repo}}"
+  args:
+    creates: '/etc/yum.repos.d/docker-ce.repo'
+
+- name: install docker require packages
+  yum:
+    name: "{{ docker_packages }}"

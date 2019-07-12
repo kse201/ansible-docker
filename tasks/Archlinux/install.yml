@@ -1,0 +1,6 @@
+---
+- name: ensure docker is installed
+  pacman:
+    name: docker
+  when: ansible_os_family == "Archlinux"
+  become: yes

@@ -1,0 +1,10 @@
+---
+docker_required_package:
+  - yum-utils
+  - device-mapper-persistent-data
+  - lvm2
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+docker_ce_repo: https://download.docker.com/linux/centos/docker-ce.repo
